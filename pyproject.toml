@@ -24,7 +24,7 @@ pydantic-settings = "^2.8.1"
 pre-commit = "^2.12.1"
 
 [tool.poetry.group.test.dependencies]
-pytest-cov = "^2.11.1"
+pytest-cov = ">=2.11.1,<7.0.0"
 black = "^24.10.0"
 bandit = "^1.7.0"
 piprot = "^0.9.11"
