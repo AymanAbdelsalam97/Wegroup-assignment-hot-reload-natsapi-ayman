@@ -1,0 +1,41 @@
+name: Test
+
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  ci:
+      runs-on: ubuntu-latest
+      strategy:
+        matrix:
+          python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+          poetry-version: ["1.8.3"]
+          pydantic-version: ["pydantic<2", "pydantic>=2"]
+
+
+      services:
+        nats:
+          # Docker Hub image
+          image: nats
+          ports:
+            - 4222:4222
+
+      steps:
+        - uses: actions/checkout@v3
+        - uses: actions/setup-python@v4
+          with:
+            python-version: ${{ matrix.python-version }}
+        - name: Run image
+          uses: abatilo/actions-poetry@v2
+          with:
+            poetry-version: ${{ matrix.poetry-version }}
+        - name: Install Dependencies
+          run: |
+            poetry install
+            pip install --upgrade "${{ matrix.pydantic-version }}"
+        - name: Run CI scripts
+          run: make ci

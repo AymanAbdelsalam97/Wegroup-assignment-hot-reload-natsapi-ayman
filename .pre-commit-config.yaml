@@ -1,0 +1,33 @@
+exclude: ^(blib2to3/|profiling/|tests/data/|\.mypy/|\.tox/)
+repos:
+-   repo: git@github.com:pre-commit/pre-commit-hooks
+    rev: v4.4.0
+    hooks:
+    -   id: requirements-txt-fixer
+    -   id: check-case-conflict
+    -   id: check-json
+    -   id: debug-statements
+    -   id: check-merge-conflict
+    -   id: check-symlinks
+    -   id: end-of-file-fixer
+    -   id: check-added-large-files
+    -   id: check-toml
+    -   id: trailing-whitespace
+    -   id: pretty-format-json
+        args:
+        - --autofix
+    -   id: trailing-whitespace
+-   repo: local
+    hooks:
+    - id: black
+      name: black
+      language: system
+      entry: black
+      types: [python]
+
+-   repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.0.254
+    hooks:
+    -   id: ruff
+        args:
+        - --fix
