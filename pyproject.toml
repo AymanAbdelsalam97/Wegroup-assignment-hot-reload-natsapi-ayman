@@ -29,7 +29,7 @@ black = "^24.10.0"
 bandit = "^1.7.0"
 piprot = "^0.9.11"
 safety = "^1.10.3"
-pytest-asyncio = "^0.17.2"
+pytest-asyncio = ">=0.17.2,<0.27.0"
 vulture = "^2.13"
 ruff = "^0.8.6"
 
